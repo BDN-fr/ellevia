@@ -1,24 +1,23 @@
 'use client'
 
-import Config from '@/config'
+import call from '@/components/api'
 import { useEffect } from 'react'
 
 export default function StopSearch({ placeholder }) {
     useEffect(() => {
         var input = document.getElementById('searchInput')
         input.oninput = e => {
-            fetch(
-                '/api/places/?q='+input.value
-            ).then(res => {
-                res.json().then(json => {console.log(json)})
-                // res.text().then(text => {
-                //     console.log(text)
-                // })
-            })
+            var val = input.value
+            setTimeout(() => {
+                if (val != input.value) {return}
+                call('GET', 'places/?q='+input.value).then(res => {
+                    console.log(res)
+                })
+            }, 1000)
         }
     })
     return (
-        <div className="">
+        <div>
             <input id="searchInput" placeholder={placeholder}/>
         </div>
     )

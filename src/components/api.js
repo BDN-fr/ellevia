@@ -10,9 +10,7 @@ export default async function call(method, params) {
             }
         }
     )
-    if (res.ok) {
+    if (res.status==200) {
         return await res.json()
-    } else {
-        return [res.status, res.statusText]
     }
 }

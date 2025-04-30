@@ -1,0 +1,10 @@
+footer {
+    background-color: var(--menu);
+    min-height: 10em;
+    height: fit-content;
+    padding-bottom: 1em;
+
+    * {
+        color: var(--principal);
+    }
+}

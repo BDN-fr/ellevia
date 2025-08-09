@@ -15,7 +15,7 @@
         <!-- todo -->
       </div>
     {/if}
-    <div class="gap-2 size-full flex flex-col items-center lg:justify-center-safe m-2 p-2">
+    <div class="gap-2 h-full w-full flex flex-col items-center lg:justify-center-safe m-2 lg:mr-0 p-2 lg:overflow-y-scroll">
       {#each results.journeys as journey}
         <JourneyCard journey={journey} />
       {/each}

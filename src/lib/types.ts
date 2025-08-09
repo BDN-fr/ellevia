@@ -182,6 +182,18 @@ interface SectionBase {
   departure_date_time: string;
   arrival_date_time: string;
   type: string;
+  links: Link[];
+}
+
+interface WaitingSection extends SectionBase {
+  type: "waiting";
+}
+
+interface TransferSection extends SectionBase {
+  type: "transfer";
+  transfer_type: string;
+  from?: Place;
+  to?: Place;
 }
 
 interface StreetNetworkSection extends SectionBase {
@@ -194,7 +206,6 @@ interface StreetNetworkSection extends SectionBase {
     properties: { length: number }[];
   };
   mode: string;
-  links: Link[];
   path: PathInstruction[];
 }
 
@@ -227,7 +238,6 @@ interface PublicTransportSection extends SectionBase {
     physical_mode: string;
     equipments: any[];
   };
-  links: Link[];
   stop_date_times: {
     departure_date_time: string;
     base_departure_date_time?: string;
@@ -239,7 +249,7 @@ interface PublicTransportSection extends SectionBase {
   }[];
 }
 
-type Section = StreetNetworkSection | PublicTransportSection;
+type Section = StreetNetworkSection | PublicTransportSection | WaitingSection | TransferSection;
 
 interface Journey {
   duration: number;

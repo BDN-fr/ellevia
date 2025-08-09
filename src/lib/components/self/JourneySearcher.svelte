@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getJourneys } from "$lib/api";
+	import Button from "../ui/Button.svelte";
 	import PlaceInput from "../ui/PlaceInput.svelte";
 
   let {results = $bindable()} = $props()
@@ -23,7 +24,9 @@
   <div class="flex gap-1 w-full">
     Arrivée <PlaceInput bind:place={to} />
   </div>
-  <button type="submit" class="bg-black text-white p-2 cursor-pointer">
-    Afficher les trajets
-  </button>
+  <div class="w-fit">
+    <Button type="submit">
+      Afficher les trajets
+    </Button>
+  </div>
 </form>

@@ -10,7 +10,6 @@ let result: ApiGetPlaces | undefined = $state()
 async function search() {
   if (input.length < 3 || input.replaceAll(' ', '') === '') return
   result = await getPlaces(input)
-  console.log(result)
 }
 
 function setPlace(p: Place) {

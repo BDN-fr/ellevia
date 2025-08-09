@@ -23,7 +23,7 @@
   <div class="flex gap-1 w-full">
     Arrivée <PlaceInput bind:place={to} />
   </div>
-  <button type="submit" class="bg-black text-white p-2">
+  <button type="submit" class="bg-black text-white p-2 cursor-pointer">
     Afficher les trajets
   </button>
 </form>

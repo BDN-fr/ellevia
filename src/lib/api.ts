@@ -19,12 +19,13 @@ async function GET(endpoint: String) {
 
 // Todo: Add error handeling / notifications
 // {"error":{"id":"no_destination","message":"Public transport is not reachable from destination"},"feed_publishers":[],"links":[],"tickets":[],"disruptions":[],"context":{"current_datetime":"20250809T061635","timezone":"Europe\/Paris"},"notes":[],"exceptions":[]}
+// {"error":{"id":"no_solution","message":"no solution found for this journey"},"feed_publishers":[],"links":[],"tickets":[],"disruptions":[],"context":{"current_datetime":"20250809T175111","timezone":"Europe\/Paris"},"notes":[],"exceptions":[]}
 
 export async function getPlaces(searchText: String): Promise<ApiGetPlaces | undefined> {
   return await GET('/places?q='+searchText)
 }
 
-export async function getJourneys(from?: Coord, to?: Coord) {
+export async function getJourneys(from?: Coord, to?: Coord): Promise<ApiGetJourneys | undefined> {
   if (!(from && to)) {
     console.error('from or to have to be defined')
     return

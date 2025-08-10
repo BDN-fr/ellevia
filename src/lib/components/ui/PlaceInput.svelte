@@ -2,7 +2,7 @@
 import {getPlaces} from "$lib/api";
 import { clickoutside } from '@svelte-put/clickoutside';
 
-let {place=$bindable()} = $props()
+let {place=$bindable(), uid} = $props()
 
 let input: String = $state('')
 let result: ApiGetPlaces | undefined = $state()
@@ -25,7 +25,7 @@ function stopSearch() {
 </script>
 
 <div class="relative w-full h-fit">
-  <input type="text" bind:value={input} oninput={search} class="w-full border border-black">
+  <input type="text" bind:value={input} oninput={search} id={uid} class="w-full border border-black px-1">
   {#if result}
     <div use:clickoutside onclickoutside={stopSearch} class="absolute flex flex-col gap-1 bg-white border border-black z-10 w-full">
       {#each result?.places as place}

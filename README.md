@@ -5,3 +5,5 @@ todo:
 - Modification de la vitesse de marche (et paramètre fauteil roulant)
 - Désactiver certains moyen de transport
 - SEO
+- Ajouter logo
+- Ajouter les disruptions

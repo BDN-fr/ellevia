@@ -10,7 +10,7 @@ export function durationString(duration:number): String {
 
 export function getErrorMessage(id: string): string | undefined {
   switch (id) {
-    case "no_solution": return "Pas de solution possible pour ce trajet"
+    case "no_solution": return "Pas de solution possible pour ce trajet, essayez de modifier la date et l'heure"
     case "no_destination": return "La destination n'est pas desservie, essayez de modifier la date et l'heure"
     default: return
   }

@@ -4,7 +4,7 @@
 	import PopUp from "../ui/PopUp.svelte";
 
   let {datetime = $bindable(), datetimeType = $bindable(), opened = $bindable(true)} = $props()
-  datetime = new Date().toISOString().slice(0,16)
+  if (!datetime) datetime = new Date().toISOString().slice(0,16)
 </script>
 
 <PopUp bind:opened={opened}>

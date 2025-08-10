@@ -15,18 +15,21 @@
   <div>
     {dateTimeString(journey.departure_date_time)} → {dateTimeString(journey.arrival_date_time)} - {durationString(journey.duration)}
   </div>
-  <div class="p-2 gap-2 flex flex-wrap">
-    {#each journey.sections as section}
-      {#if section.type == "public_transport" && section.display_informations}
-        <span
-        style="background-color: #{section.display_informations.color}; color: #{section.display_informations.text_color};"
-        class="p-1"
-        >
-          {section.display_informations.code}
-        </span>
-      {/if}
-    {/each}
-  </div>
+  {#if !journey.tags.find((v, i, obj) => v == 'non_pt')}
+      <div class="p-2 gap-2 flex flex-wrap">
+      {#each journey.sections as section}
+        {#if section.type == "public_transport" || section.type == "on_demand_transport" && section.display_informations}
+          <span
+          style="background-color: #{section.display_informations.color}; color: #{section.display_informations.text_color};"
+          class="p-1"
+          >
+            {section.display_informations.code}
+          </span>
+        {/if}
+      {/each}
+    </div>
+  {/if}
+  Marche: {durationString(journey.durations.walking)}
   {#if expend}
     <div class="flex flex-col gap-2 mb-2">
       <Sections sections={journey.sections}/>

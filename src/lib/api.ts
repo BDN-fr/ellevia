@@ -10,12 +10,7 @@ async function GET(endpoint: String) {
     "method":"GET",
     // "referrer":"https://www.ilevia.fr/"
   })
-  if (res.ok) {
-    return await res.json()
-  } else {
-    console.error(res.status, res.statusText)
-    return
-  }
+  return await res.json()
 }
 
 async function getProductionRange() {

@@ -41,7 +41,7 @@
     maintenant
   {/if}
   <div class="flex w-full gap-2">
-    <span class="w-fit"><Button principal={false} onclick={() => showTimePopUp = true}>Horaire</Button></span>
+    <span class="w-fit"><Button type='button' principal={false} onclick={() => showTimePopUp = true}>Horaire</Button></span>
     <span class="w-full grow">
       <Button type="submit">
         Afficher les trajets

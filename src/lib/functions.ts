@@ -7,3 +7,11 @@ export function durationString(duration:number): String {
   const minutes = Math.floor((duration % 3600) / 60);
   return hours > 0 ? `${hours}h${minutes.toString().padStart(2, '0')}` : `${minutes}min`;
 }
+
+export function getErrorMessage(id: string): string | undefined {
+  switch (id) {
+    case "no_solution": return "Pas de solution possible pour se trajet"
+    case "no_destination": return "La destination n'est pas desservie, essayez de modifier la date et l'heure"
+    default: return
+  }
+}

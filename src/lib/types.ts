@@ -210,7 +210,7 @@ interface StreetNetworkSection extends SectionBase {
 }
 
 interface PublicTransportSection extends SectionBase {
-  type: "public_transport";
+  type: "public_transport" | "on_demand_transport";
   base_departure_date_time?: string;
   base_arrival_date_time?: string;
   data_freshness?: string;
@@ -319,4 +319,8 @@ interface ApiGetJourneys {
   context: Context;
   notes: any[];
   exceptions: any[];
+  error?: {
+    id: string;
+    message: string;
+  }
 }

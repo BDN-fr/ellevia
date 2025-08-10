@@ -1,18 +1,11 @@
 <script lang="ts">
   import {durationString, dateTimeString} from "$lib/functions"
+	import WalkSection from "./WalkSection.svelte";
 
   interface Props {
     sections: Section[]
   }
   let {sections}: Props = $props()
-
-  function walkLengthSum(path: PathInstruction[]): number {
-    var sum = 0
-    path.forEach(e => {
-      sum += e.length
-    });
-    return sum
-  }
 
   function showFrom(i: number): boolean {
     var prev = sections[i-1]
@@ -33,7 +26,7 @@
       <span class="text-neutral-600">{dateTimeString(section.departure_date_time)} - {section.from.name} <br></span>
     {/if}
     <div class="min-h-6">
-      {#if section.type == "public_transport" && section.display_informations}
+      {#if section.type == "public_transport" || section.type == "on_demand_transport" && section.display_informations}
         {durationString(section.duration)} - {section.display_informations.commercial_mode}
         <span
         style="background-color: #{section.display_informations.color}; color: #{section.display_informations.text_color};"
@@ -42,13 +35,11 @@
           {section.display_informations.code}
         </span>
         Direction {section.display_informations.direction}
+        {#if section.type == "on_demand_transport"}
+          A réserver <a href="https://reservation.ilevia.fr">ici</a>
+        {/if}
       {:else if section.type == "non_pt_walk" || section.type == "street_network"}
-        {durationString(section.duration)} - Marche {walkLengthSum(section.path)}m
-        <div class="bg-neutral-100 p-2">
-          {#each section.path as instruction}
-            <p>{instruction.instruction}</p>
-          {/each}
-        </div>
+        <WalkSection section={section} />
       {/if}
     </div>
     <span class="text-neutral-600">{dateTimeString(section.arrival_date_time)} - {section.to.name} <br></span>

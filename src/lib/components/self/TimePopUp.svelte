@@ -4,7 +4,11 @@
 	import PopUp from "../ui/PopUp.svelte";
 
   let {datetime = $bindable(), datetimeType = $bindable(), opened = $bindable(true)} = $props()
-  if (!datetime) datetime = new Date().toISOString().slice(0,16)
+  if (!datetime) {
+    const now: Date = new Date();
+    const offset: number = now.getTimezoneOffset() * 60000; // Convert minutes to milliseconds
+    datetime = new Date(now.getTime() - offset).toISOString().slice(0,16);
+  }
 </script>
 
 <PopUp bind:opened={opened}>

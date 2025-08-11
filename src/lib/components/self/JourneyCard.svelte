@@ -2,6 +2,7 @@
 	import Button from "../ui/Button.svelte";
 	import Sections from "../ui/Sections.svelte";
   import {durationString, dateTimeString} from "$lib/functions"
+	import TransportBadge from "../ui/TransportBadge.svelte";
 
   interface Props {
     journey: Journey;
@@ -19,19 +20,14 @@
       <div class="p-2 gap-2 flex flex-wrap">
       {#each journey.sections as section}
         {#if section.type == "public_transport" || section.type == "on_demand_transport" && section.display_informations}
-          <span
-          style="background-color: #{section.display_informations.color}; color: #{section.display_informations.text_color};"
-          class="p-1"
-          >
-            {section.display_informations.code}
-          </span>
+          <TransportBadge color={section.display_informations.color} textColor={section.display_informations.text_color} code={section.display_informations.code} />
         {/if}
       {/each}
     </div>
   {/if}
   Marche: {durationString(journey.durations.walking)}
   {#if expend}
-    <div class="flex flex-col gap-2 mb-2">
+    <div class="flex flex-col gap-2 my-2 pt-2 border-t border-black ">
       <Sections sections={journey.sections}/>
     </div>
   {/if}

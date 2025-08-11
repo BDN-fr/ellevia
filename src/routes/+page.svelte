@@ -1,17 +1,24 @@
 <script lang="ts">
+	import Disruptions from "$lib/components/self/Disruptions.svelte";
 	import JourneyCard from "$lib/components/self/JourneyCard.svelte";
 	import JourneySearcher from "$lib/components/self/JourneySearcher.svelte";
 	import { getErrorMessage } from "$lib/functions";
 
+  import logo from "$lib/assets/images/logo.png";
+	import Seo from "$lib/components/self/SEO.svelte";
+
   let results: ApiGetJourneys | undefined = $state()
 </script>
 
-<main class="w-full h-svh flex flex-col items-center {results ? 'justify-start lg:flex-row' : 'justify-center'} bg-white">
-  <div class="w-full max-w-100">
+<Seo />
+
+<main class="w-full min-h-svh lg:h-svh flex flex-col items-center {results ? 'justify-start lg:flex-row' : 'justify-center'} bg-white">
+  <div class="relative w-full max-w-100 flex flex-col gap-4 {results ? 'mt-4 lg:mt-0 lg:ml-8' : ''}">
+    <img src={logo} alt="logo" class="w-1/2 mx-auto left-0 right-0" />
     <JourneySearcher bind:results={results}/>
   </div>
   {#if results}
-    <div class="gap-2 h-full w-full flex flex-col items-center lg:justify-center-safe m-2 lg:mr-0 p-2 lg:overflow-y-scroll">
+    <div class="gap-2 h-full w-full flex flex-col items-center lg:justify-center-safe m-2 pb-8 lg:mr-0 p-2 lg:overflow-y-scroll">
       {#if results.error}
         <div class="bg-red-200 w-fit p-2 border-2 border-red-500">
           {#if getErrorMessage(results.error.id)}
@@ -23,9 +30,7 @@
         </div>
       {/if}
       {#if results.disruptions.length > 0}
-        <div class="bg-orange-300 w-fit p-2 border-2 border-orange-500">
-          <!-- Todo: Add disruptions -->
-        </div>
+        <Disruptions disruptions={results.disruptions} />
       {/if}
       {#each results.journeys as journey}
         <JourneyCard journey={journey} />

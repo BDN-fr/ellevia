@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getJourneys } from "$lib/api";
-	import { fade } from "svelte/transition";
 	import Button from "../ui/Button.svelte";
 	import PlaceInput from "../ui/PlaceInput.svelte";
 	import TimePopUp from "./TimePopUp.svelte";
@@ -16,7 +15,8 @@
     if (!from || !to) return
     // if (!from.embedded_type || !to.embedded_type) return
     // if (!from[from.embedded_type] || !to[to.embedded_type]) return
-    results = await getJourneys(from?.[from.embedded_type]?.coord, to?.[to.embedded_type]?.coord, datetime, datetimeType)
+    // results = await getJourneys(from?.[from.embedded_type]?.coord, to?.[to.embedded_type]?.coord, datetime, datetimeType)
+    results = await getJourneys(from?.id, to?.id, datetime, datetimeType)
   }
 
   let datetime: string | undefined = $state()
@@ -24,7 +24,7 @@
   let showTimePopUp = $state(false)
 </script>
 
-<form onsubmit={search} class="flex flex-col items-center gap-2 w-full p-2" transition:fade>
+<form onsubmit={search} class="flex flex-col items-center gap-2 w-full max-w-100 p-2">
   <div class="flex flex-col items-center gap-1 w-full">
     <label for="{uid}From">Départ</label>
     <PlaceInput bind:place={from} uid="{uid}From" />

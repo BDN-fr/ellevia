@@ -12,4 +12,4 @@
 </svelte:head>
 
 {@render children?.()}
-<Footer/>
+<Footer />

@@ -18,22 +18,24 @@
   }
 </script>
 
-<div class="flex {showPath ? 'flex-col' : 'items-center'} gap-2">
-  {durationString(section.duration)} - Marche {walkLengthSum(section.path)}m
-  <div class="{showPath ? 'w-full' : 'w-fit'}">
-    <Button principal={false} onclick={() => showPath = !showPath}>
-      {#if showPath}
-        Cacher le chemin
-      {:else}
-        Afficher le chemin
-      {/if}
-    </Button>
+{#if section.path && section.duration > 0}
+  <div class="flex {showPath ? 'flex-col' : 'items-center'} gap-2">
+    {durationString(section.duration)} - Marche {walkLengthSum(section.path)}m
+    <div class="{showPath ? 'w-full' : 'w-fit'}">
+      <Button principal={false} onclick={() => showPath = !showPath}>
+        {#if showPath}
+          Cacher le chemin
+        {:else}
+          Afficher le chemin
+        {/if}
+      </Button>
+    </div>
   </div>
-</div>
-{#if showPath}
-  <div class="bg-neutral-100 p-2">
-    {#each section.path as instruction}
-      <p>{instruction.instruction}</p>
-    {/each}
-  </div>
+  {#if showPath}
+    <div class="bg-neutral-100 p-2">
+      {#each section.path as instruction}
+        <p>{instruction.instruction}</p>
+      {/each}
+    </div>
+  {/if}
 {/if}

@@ -206,7 +206,7 @@ interface StreetNetworkSection extends SectionBase {
     properties: { length: number }[];
   };
   mode: string;
-  path: PathInstruction[];
+  path?: PathInstruction[];
 }
 
 interface PublicTransportSection extends SectionBase {
@@ -269,6 +269,14 @@ interface Journey {
   links?: Link[];
 }
 
+interface pt_object {
+  id: string;
+  name: string;
+  quality: number;
+  embedded_type: 'line';
+  line?: Line;
+};
+
 interface Disruption {
   id: string;
   disruption_id: string;
@@ -296,13 +304,7 @@ interface Disruption {
     };
   }[];
   impacted_objects: {
-    pt_object: {
-      id: string;
-      name: string;
-      quality: number;
-      embedded_type: string;
-      line?: Line;
-    };
+    pt_object?: pt_object;
   }[];
   uri: string;
   disruption_uri: string;

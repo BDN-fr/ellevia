@@ -29,20 +29,28 @@ export async function getPlaces(searchText: String): Promise<ApiGetPlaces | unde
   return await GET('/places?q='+searchText)
 }
 
-export async function getJourneys(from?: Coord, to?: Coord, datetime?: string | undefined, datetimeType?: "departure" | "arrival" | undefined): Promise<ApiGetJourneys | undefined> {
+export async function getJourneys(from?: Coord | string, to?: Coord | string, datetime?: string | undefined, datetimeType?: "departure" | "arrival" | undefined): Promise<ApiGetJourneys | undefined> {
   if (!(from && to)) {
     console.error('from or to have to be defined')
     return
   }
   var params = '?'
   if (from) {
-    params += 'from=' + encodeURIComponent(from.lon + ';' + from.lat)
+    if (typeof from == "object") {
+      params += 'from=' + encodeURIComponent(from.lon + ';' + from.lat)
+    } else {
+      params += 'from=' + encodeURIComponent(from)
+    }
   }
   if (from && to) {
     params += '&'
   }
   if (to) {
-    params += 'to=' + encodeURIComponent(to.lon + ';' + from.lat)
+    if (typeof to == "object") {
+      params += 'to=' + encodeURIComponent(to.lon + ';' + to.lat)
+    } else {
+      params += 'to=' + encodeURIComponent(to)
+    }
   }
   if (datetime) {
     params += "&datetime=" + encodeURIComponent(datetime)
@@ -50,5 +58,5 @@ export async function getJourneys(from?: Coord, to?: Coord, datetime?: string | 
   if (datetimeType) {
     params += "&datetime_represents=" + encodeURI(datetimeType)
   }
-  return await GET('/journeys' + params + "&free_radius_from=10&free_radius_to=10")
+  return await GET('/journeys' + params + "&free_radius_from=10&free_radius_to=10") // &data_freshness=realtime
 }

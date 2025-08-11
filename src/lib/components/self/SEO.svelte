@@ -20,6 +20,6 @@
   <meta name="theme-color" content={colorTheme}>
   <meta name="keywords" content="Lille, MEL, Métropôle Lilloise, Transport en commun, Bus, Train, Tram, Métro, Autocar, Ilevia" />
   <meta name="author" content="BDN_fr" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <!-- <meta name="twitter:card" content="summary_large_image" /> -->
   <meta property="og:type" content="website" />
 </svelte:head>

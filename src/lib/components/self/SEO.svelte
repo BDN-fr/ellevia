@@ -3,7 +3,7 @@
     title="Ellevia",
     description="Trouvez vos trajets en transports en commun dans la MEL plus simplement et plus rapidement. Toutes les informations dont vous avez besoin sans devoir utiliser l'horrible aplication Ilevia 🤯",
     url = "https://ellevia.bdn-fr.xyz",
-    image = "https://github.com/BDN-fr/ellevia/blob/main/static/images/logo.png?raw=true",
+    image = "https://github.com/BDN-fr/ellevia/blob/main/static/images/logo-small.png?raw=true",
     colorTheme = "#FFFFFF"
   } = $props()
 </script>

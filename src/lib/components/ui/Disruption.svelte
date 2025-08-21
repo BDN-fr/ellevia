@@ -9,7 +9,7 @@
 
   const title = disruption.messages.find((v, i, obj) => {
     return v.channel.types[0] == "title" || v.channel.name == "titre"
-  })?.text
+  })?.text || 'Titre non trouvé'
 
   let impacted_objects: Line[] = $state([])
   disruption.impacted_objects.forEach(e => {
@@ -20,17 +20,22 @@
   });
 </script>
 
-<div class="flex flex-col">
-  <h2 class="text-xl ml-4">{title}</h2>  
-  <div class="flex w-fit gap-2 items-center my-2">
-    Affecte
-    {#each impacted_objects as obj}
-      <TransportBadge color={obj.color} textColor={obj.text_color} code={obj.code} />
+<!-- No realtime for now -->
+{#if disruption.contributor != "realtime.fr-npdc.ter"} 
+  <div class="flex flex-col">
+    <h2 class="text-xl ml-4">{title}</h2>  
+    <div class="flex w-fit gap-2 items-center my-2">
+      {#if impacted_objects.length > 0}
+        Affecte
+        {#each impacted_objects as obj}
+          <TransportBadge color={obj.color} textColor={obj.text_color} code={obj.code} />
+        {/each}
+      {/if}
+    </div>
+    {#each disruption.messages as message}
+      {#if message.channel.content_type == "text/html"}
+        <DisruptionText text={message.text} />
+      {/if}
     {/each}
   </div>
-  {#each disruption.messages as message}
-    {#if message.channel.content_type == "text/html"}
-      <DisruptionText text={message.text} />
-    {/if}
-  {/each}
-</div>
+{/if}

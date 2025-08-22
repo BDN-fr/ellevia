@@ -10,7 +10,7 @@
   }
   let {journey}: Props = $props()
 
-  // let link = "/trajet/" + btoa(JSON.stringify(journey))
+  let link = "/trajet/"
 
   let expend = $state(false)
 </script>
@@ -28,8 +28,8 @@
       {/each}
     </div>
   {/if}
-  <!-- <a href={link} class="absolute right-0 top-0 border-black border-b border-l">
-    <Button>
+  <!-- <a href={link} class="absolute right-0 top-0">
+    <Button principal={false} style="border-top: none; border-right: none;">
       <Link/>
     </Button>
   </a> -->

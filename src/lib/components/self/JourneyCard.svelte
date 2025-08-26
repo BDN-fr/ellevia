@@ -3,14 +3,11 @@
 	import Sections from "../ui/Sections.svelte";
   import {durationString, dateTimeString} from "$lib/functions"
 	import TransportBadge from "../ui/TransportBadge.svelte";
-  import Link from '@lucide/svelte/icons/link';
 
   interface Props {
     journey: Journey;
   }
   let {journey}: Props = $props()
-
-  let link = "/trajet/"
 
   let expend = $state(false)
 </script>
@@ -28,11 +25,6 @@
       {/each}
     </div>
   {/if}
-  <!-- <a href={link} class="absolute right-0 top-0">
-    <Button principal={false} style="border-top: none; border-right: none;">
-      <Link/>
-    </Button>
-  </a> -->
   Marche: {durationString(journey.durations.walking)}
   {#if expend}
     <div class="flex flex-col gap-2 my-2 pt-2 border-t border-black ">

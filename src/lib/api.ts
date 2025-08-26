@@ -29,7 +29,11 @@ export async function getPlaces(searchText: String): Promise<ApiGetPlaces | unde
   return await GET('/places?q='+searchText)
 }
 
-export async function getJourneys(from?: Coord | string, to?: Coord | string, datetime?: string | undefined, datetimeType?: "departure" | "arrival" | undefined): Promise<ApiGetJourneys | undefined> {
+export async function getPlace(id: string): Promise<ApiGetPlaces | undefined> {
+  return await GET('/places/'+id)
+}
+
+export async function getJourneys(from?: Coord | string, to?: Coord | string, datetime?: string | undefined | null, datetimeType?: "departure" | "arrival" | undefined): Promise<ApiGetJourneys | undefined> {
   if (!(from && to)) {
     console.error('from or to have to be defined')
     return

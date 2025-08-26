@@ -2,9 +2,18 @@
 import {getPlaces} from "$lib/api";
 import { clickoutside } from '@svelte-put/clickoutside';
 
-let {place=$bindable(), uid} = $props()
+interface Props {
+  place: Place | undefined,
+  uid: string
+}
+let {place=$bindable(), uid}: Props = $props()
 
-let input: String = $state('')
+let input = $derived.by(() => {
+  if (place) {
+    return place.name
+  }
+  return ''
+})
 let result: ApiGetPlaces | undefined = $state()
 
 async function search() {

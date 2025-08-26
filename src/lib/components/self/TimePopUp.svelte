@@ -1,13 +1,16 @@
 <script lang="ts">
 	import { productionRange } from "$lib/api";
+	import { getCurrentIsoTime } from "$lib/functions";
 	import Button from "../ui/Button.svelte";
 	import PopUp from "../ui/PopUp.svelte";
 
   let {datetime = $bindable(), datetimeType = $bindable(), opened = $bindable(true)} = $props()
   if (!datetime) {
-    const now: Date = new Date();
-    const offset: number = now.getTimezoneOffset() * 60000; // Convert minutes to milliseconds
-    datetime = new Date(now.getTime() - offset).toISOString().slice(0,16);
+    setCurrentDatetime() 
+  }
+
+  function setCurrentDatetime() {
+    datetime = getCurrentIsoTime()
   }
 </script>
 
@@ -20,5 +23,8 @@
     <div>
       Date et heure : <input type="datetime-local" min={productionRange.min} max={productionRange.max} bind:value={datetime}>
     </div>
+    <Button principal={false} onclick={setCurrentDatetime}>
+      Date et heure actuelle
+    </Button>
   </div>
 </PopUp>

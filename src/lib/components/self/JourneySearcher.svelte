@@ -1,17 +1,21 @@
 <script lang="ts">
-	import { getJourneys } from "$lib/api";
+	import { getJourneys, getPlace } from "$lib/api";
+	import { getCurrentIsoTime } from "$lib/functions";
 	import Button from "../ui/Button.svelte";
 	import PlaceInput from "../ui/PlaceInput.svelte";
 	import TimePopUp from "./TimePopUp.svelte";
+	import { page } from "$app/state";
+	import { onMount } from "svelte";
 
   let {results = $bindable()} = $props()
-
   const uid = $props.id();
+  const params = page.url.searchParams
 
   let from: Place | undefined = $state()
   let to: Place | undefined = $state()
 
-  async function search() {
+  async function search(event: Event) {
+    event.preventDefault()
     if (!from || !to) return
     // if (!from.embedded_type || !to.embedded_type) return
     // if (!from[from.embedded_type] || !to[to.embedded_type]) return
@@ -19,35 +23,60 @@
     results = await getJourneys(from?.id, to?.id, datetime, datetimeType)
   }
 
-  let datetime: string | undefined = $state()
+  let datetime: string | undefined | null = $state(params.get('datetime'))
   let datetimeType: "departure" | "arrival" = $state('departure')
   let showTimePopUp = $state(false)
+
+  let link = $derived.by(() => {
+    if (!(from && to)) {
+      return null
+    }
+    return page.url.protocol+'//'+page.url.host+`/?from=${encodeURIComponent(from.id)}&to=${encodeURIComponent(to.id)}&datetime=${encodeURIComponent(datetime ? datetime : getCurrentIsoTime())}&datetimetype=${datetimeType}`
+  })
+
+  onMount(() => {
+    let paramFrom = params.get('from')
+    if (paramFrom) {
+      getPlace(paramFrom).then((res) => {
+        from = res?.places[0]
+      })
+    }
+
+    let paramTo = params.get('to')
+    if (paramTo) {
+      getPlace(paramTo).then((res) => {
+        to = res?.places[0]
+      })
+    }
+  })
 </script>
 
 <form onsubmit={search} class="flex flex-col items-center gap-2 w-full max-w-100 p-2">
-  <div class="flex flex-col items-center gap-1 w-full">
+  <div class="flex flex-col items-center gap-1 w-full mb-2">
     <label for="{uid}From">Départ</label>
     <PlaceInput bind:place={from} uid="{uid}From" />
     <label for="{uid}To">Arrivée</label>
     <PlaceInput bind:place={to} uid="{uid}To" />
   </div>
-  {datetimeType == "departure" ? 'Départ' : 'Arrivée'}
-  {#if datetime}
-    le 
-    {new Date(datetime).toLocaleDateString()}
-    à 
-    {new Date(datetime).toLocaleTimeString()}
-  {:else}
-    maintenant
+  <Button type='button' principal={false} onclick={() => showTimePopUp = true}>
+    {datetimeType == "departure" ? 'Départ' : 'Arrivée'}
+    {#if datetime}
+      le
+      {new Date(datetime).toLocaleDateString()}
+      à
+      {new Date(datetime).toLocaleTimeString()}
+    {:else}
+      maintenant
+    {/if}
+  </Button>
+  <Button type="submit">
+    Afficher les trajets
+  </Button>
+  {#if link && results}
+    <Button principal={false} type="button" onclick={() => {navigator.clipboard.writeText(link)}}>
+      Copier le lien
+    </Button>
   {/if}
-  <div class="flex w-full gap-2">
-    <span class="w-fit"><Button type='button' principal={false} onclick={() => showTimePopUp = true}>Horaire</Button></span>
-    <span class="w-full grow">
-      <Button type="submit">
-        Afficher les trajets
-      </Button>
-    </span>
-  </div>
 </form>
 
 {#if showTimePopUp}

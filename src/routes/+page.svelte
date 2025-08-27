@@ -12,7 +12,7 @@
 <Seo />
 
 <main class="w-full min-h-svh lg:h-svh flex flex-col items-center {results ? 'justify-start lg:flex-row' : 'justify-center'} bg-white">
-  <div class="w-full max-w-100 flex flex-col gap-4 {results ? 'mt-4 lg:mt-0 lg:ml-8' : ''}">
+  <!-- <div class="w-full max-w-100 flex flex-col gap-4 {results ? 'mt-4 lg:mt-0 lg:ml-8' : ''}">
     <a href="/" class="w-1/2 mx-auto left-0 right-0" onclick={() => {results = undefined}}><img src={logo} alt="logo" /></a>
     <JourneySearcher bind:results={results}/>
   </div>
@@ -35,5 +35,6 @@
         <JourneyCard journey={journey} />
       {/each}
     </div>
-  {/if}
+  {/if} -->
+  Maintenance, Je fais vite promis x)
 </main>

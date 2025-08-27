@@ -1,6 +1,7 @@
 const authorization = "aea17459-7535-4f8b-a8e3-d0eca96e56cb" // Avalaible on any request to the api on ilevia's website, so no need to hide it
 const baseURL = "https://api.navitia.io/v1/coverage/fr-npdc"
-export const productionRange = await getProductionRange()
+// export const productionRange = await getProductionRange()
+export const productionRange = {min: '2025-08-01T00:00', max: '2025-08-01T00:00'} // Placeholder data until I find a new way of accessing the API (Doing this this way is fucking ugly)
 
 async function GET(endpoint: String) {
   let res = await fetch(baseURL + endpoint, {

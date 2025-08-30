@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { productionRange } from "$lib/api";
+	import { page } from "$app/state";
 	import { getCurrentIsoTime } from "$lib/functions";
 	import Button from "../ui/Button.svelte";
 	import PopUp from "../ui/PopUp.svelte";
+
+  let productionRange = page.data.productionRange
 
   let {datetime = $bindable(), datetimeType = $bindable(), opened = $bindable(true)} = $props()
   if (!datetime) {

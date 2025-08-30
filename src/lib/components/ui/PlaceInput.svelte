@@ -18,7 +18,11 @@ let result: ApiGetPlaces | undefined = $state()
 
 async function search() {
   if (input.length < 3 || input.replaceAll(' ', '') === '') return
-  result = await getPlaces(input)
+  let text = input
+  setTimeout(async () => {
+    if (input != text) return
+    result = await getPlaces(input)
+  }, 300)
 }
 
 function setPlace(p: Place) {
@@ -34,9 +38,9 @@ function stopSearch() {
 </script>
 
 <div class="relative w-full h-fit">
-  <input type="text" bind:value={input} oninput={search} id={uid} class="w-full border border-black px-1">
+  <input type="text" bind:value={input} oninput={search} id={uid} autocomplete="off" class="w-full border border-black px-1">
   {#if result}
-    <div use:clickoutside onclickoutside={stopSearch} class="absolute flex flex-col gap-1 bg-white border border-black z-10 w-full">
+    <div use:clickoutside onclickoutside={stopSearch} class="absolute flex flex-col gap-1 bg-white border border-black z-10 w-full overflow-y-auto max-h-48">
       {#each result?.places as place}
         <button onclick={() => setPlace(place)} class="cursor-pointer hover:bg-neutral-300">
           {place.name}

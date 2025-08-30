@@ -31,21 +31,23 @@
     if (!(from && to)) {
       return null
     }
-    return page.url.protocol+'//'+page.url.host+`/?from=${encodeURIComponent(from.id)}&to=${encodeURIComponent(to.id)}&datetime=${encodeURIComponent(datetime ? datetime : getCurrentIsoTime())}&datetimetype=${datetimeType}`
+    return page.url.protocol+'//'+page.url.host+`/?from=${encodeURIComponent(from.id)}&fromName=${encodeURIComponent(from.name)}&to=${encodeURIComponent(to.id)}&toName=${encodeURIComponent(to.name)}&datetime=${encodeURIComponent(datetime ? datetime : getCurrentIsoTime())}&datetimetype=${datetimeType}`
   })
 
   onMount(() => {
     let paramFrom = params.get('from')
-    if (paramFrom) {
-      getPlace(paramFrom).then((res) => {
-        from = res?.places[0]
+    let paramFromName = params.get('fromName')
+    if (paramFrom && paramFromName) {
+      getPlace(paramFrom, paramFromName).then((res) => {
+        from = res
       })
     }
 
     let paramTo = params.get('to')
-    if (paramTo) {
-      getPlace(paramTo).then((res) => {
-        to = res?.places[0]
+    let paramToName = params.get('toName')
+    if (paramTo && paramToName) {
+      getPlace(paramTo, paramToName).then((res) => {
+        to = res
       })
     }
   })

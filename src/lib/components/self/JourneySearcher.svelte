@@ -25,6 +25,9 @@
 
   let datetime: string | undefined | null = $state(params.get('datetime'))
   let datetimeType: "departure" | "arrival" = $state('departure')
+  if (params.get('datetimetype') == "arrival") {
+    datetimeType = "arrival"
+  }
   let showTimePopUp = $state(false)
 
   let link = $derived.by(() => {

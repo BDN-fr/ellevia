@@ -16,7 +16,7 @@
 </script>
 
 {#if opened}
-  <div class="z-50 absolute size-full left-0 top-0 bg-neutral-500/50 flex items-center justify-center" {...rest}>
+  <div class="z-50 fixed size-full left-0 top-0 bg-neutral-500/50 flex items-center justify-center" {...rest}>
     <div use:clickoutside onclickoutside={close} class="size-fit max-size-full border border-black bg-white p-2">
       {@render children?.()}
     </div>

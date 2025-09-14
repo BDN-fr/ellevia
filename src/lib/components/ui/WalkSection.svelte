@@ -1,5 +1,6 @@
 <script lang="ts">
   import {durationString} from "$lib/functions"
+	import { slide } from "svelte/transition";
 	import Button from "./Button.svelte";
 
   interface Props {
@@ -32,7 +33,7 @@
     </div>
   </div>
   {#if showPath}
-    <div class="bg-neutral-100 p-2">
+    <div transition:slide={{duration:200}} class="bg-neutral-100 p-2">
       {#each section.path as instruction}
         <p>{instruction.instruction}</p>
       {/each}

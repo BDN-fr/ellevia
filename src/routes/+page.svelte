@@ -31,7 +31,7 @@
       {#if results.disruptions.length > 0}
         <Disruptions disruptions={results.disruptions} />
       {/if}
-      {#each results.journeys as journey}
+      {#each results.journeys as journey (journey)}
         <JourneyCard journey={journey} />
       {/each}
     </div>

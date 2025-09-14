@@ -17,9 +17,6 @@
   async function search(event: Event) {
     event.preventDefault()
     if (!from || !to) return
-    // if (!from.embedded_type || !to.embedded_type) return
-    // if (!from[from.embedded_type] || !to[to.embedded_type]) return
-    // results = await getJourneys(from?.[from.embedded_type]?.coord, to?.[to.embedded_type]?.coord, datetime, datetimeType)
     results = await getJourneys(from?.id, to?.id, datetime, datetimeType)
   }
 

@@ -10,7 +10,7 @@
   let showModal = $state(false)
 </script>
 
-<button class="h-full w-auto cursor-pointer" onclick={() => showModal = !showModal}>
+<button class="h-full w-auto cursor-pointer" onclick={(e) => {e.preventDefault(); showModal = !showModal}}>
   <Star />
 </button>
 

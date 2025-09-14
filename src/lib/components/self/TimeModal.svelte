@@ -2,7 +2,7 @@
 	import { page } from "$app/state";
 	import { getCurrentIsoTime } from "$lib/functions";
 	import Button from "../ui/Button.svelte";
-	import PopUp from "../ui/PopUp.svelte";
+	import Modal from "../ui/Modal.svelte";
 
   let productionRange = page.data.productionRange
 
@@ -16,7 +16,7 @@
   }
 </script>
 
-<PopUp bind:opened={opened}>
+<Modal bind:opened={opened}>
   <div class="flex flex-col gap-2">
     <div class="flex gap-2 w-full">
       <Button principal={datetimeType=="departure"} onclick={() => datetimeType = "departure"}>Départ</Button>
@@ -29,4 +29,4 @@
       Date et heure actuelle
     </Button>
   </div>
-</PopUp>
+</Modal>

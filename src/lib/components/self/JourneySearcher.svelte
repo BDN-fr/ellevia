@@ -3,7 +3,7 @@
 	import { getCurrentIsoTime } from "$lib/functions";
 	import Button from "../ui/Button.svelte";
 	import PlaceInput from "../ui/PlaceInput.svelte";
-	import TimePopUp from "./TimePopUp.svelte";
+	import TimeModal from "./TimeModal.svelte";
 	import { page } from "$app/state";
 	import { onMount } from "svelte";
 
@@ -28,7 +28,7 @@
   if (params.get('datetimetype') == "arrival") {
     datetimeType = "arrival"
   }
-  let showTimePopUp = $state(false)
+  let showTimeModal = $state(false)
 
   let link = $derived.by(() => {
     if (!(from && to)) {
@@ -63,7 +63,7 @@
     <label for="{uid}To">Arrivée</label>
     <PlaceInput bind:place={to} uid="{uid}To" />
   </div>
-  <Button type='button' principal={false} onclick={() => showTimePopUp = true}>
+  <Button type='button' principal={false} onclick={() => showTimeModal = true}>
     {datetimeType == "departure" ? 'Départ' : 'Arrivée'}
     {#if datetime}
       le
@@ -84,6 +84,6 @@
   {/if}
 </form>
 
-{#if showTimePopUp}
-  <TimePopUp bind:datetime={datetime} bind:datetimeType={datetimeType} bind:opened={showTimePopUp} />
+{#if showTimeModal}
+  <TimeModal bind:datetime={datetime} bind:datetimeType={datetimeType} bind:opened={showTimeModal} />
 {/if}

@@ -3,6 +3,7 @@
 	import Sections from "../ui/Sections.svelte";
   import {durationString, dateTimeString} from "$lib/functions"
 	import TransportBadge from "../ui/TransportBadge.svelte";
+	import { slide } from "svelte/transition";
 
   interface Props {
     journey: Journey;
@@ -27,7 +28,7 @@
   {/if}
   Marche: {durationString(journey.durations.walking)}
   {#if expend}
-    <div class="flex flex-col gap-2 my-2 pt-2 border-t border-black ">
+    <div transition:slide={{duration:200}} class="flex flex-col gap-2 my-2 pt-2 border-t border-black ">
       <Sections sections={journey.sections}/>
     </div>
   {/if}

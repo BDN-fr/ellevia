@@ -11,7 +11,7 @@
 	<script
 		defer
 		src="https://analytics.bdn-fr.xyz/script.js"
-		data-website-id="d7a48764-bd4d-4ffc-bbe4-bea51d5f8b40"
+		data-website-id="816340b5-915b-4e28-aec2-6216b3e290f1"
 	></script>
 </svelte:head>
 

@@ -5,6 +5,7 @@
 	import { getErrorMessage } from '$lib/functions';
 	import logo from '$lib/assets/images/logo.png';
 	import Seo from '$lib/components/self/SEO.svelte';
+	import Settings from '$lib/components/self/Settings.svelte';
 
 	let results: ApiGetJourneys | undefined = $state();
 </script>
@@ -16,6 +17,7 @@
 		? 'justify-start lg:flex-row'
 		: 'justify-center'} bg-white"
 >
+	<Settings />
 	<div class="flex w-full max-w-100 flex-col gap-4 {results ? 'mt-4 lg:mt-0 lg:ml-8' : ''}">
 		<a
 			href="/"

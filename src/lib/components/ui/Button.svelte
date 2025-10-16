@@ -8,11 +8,12 @@
 </script>
 
 <button
-	class="w-full cursor-pointer border border-black p-2 {principal
-		? 'bg-black text-white hover:bg-white hover:text-black'
-		: 'bg-white text-black hover:bg-black hover:text-white'}"
-	type={rest.type ? rest.type : 'button'}
 	{...rest}
+	class={["w-full cursor-pointer border border-black p-2", principal
+		? 'bg-black text-white hover:bg-white hover:text-black'
+		: 'bg-white text-black hover:bg-black hover:text-white',
+		rest.class]}
+	type={rest.type ? rest.type : 'button'}
 >
 	{@render children?.()}
 </button>
